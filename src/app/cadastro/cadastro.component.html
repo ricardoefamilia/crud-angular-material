@@ -11,7 +11,7 @@
                             <mat-form-field class="full-width">
                                 <mat-label>Nome: </mat-label>
                                 <input type="text" matInput placeholder="Digite o nome" name="nome" [(ngModel)]="cliente.nome" required>
-                                <mat-error *ngIf="clientesFrm.controls.nome?.errors?.required">O nome é obrigatório</mat-error>
+                                <!-- <mat-error *ngIf="clientesFrm.controls.nome?.errors?.required">O nome é obrigatório</mat-error> -->
                             </mat-form-field>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                             <mat-form-field class="full-width">
                                 <mat-label>E-Mail: </mat-label>
                                 <input type="email" matInput placeholder="Digite seu E-Mail" name="email" [(ngModel)]="cliente.email" required>
-                                <mat-error *ngIf="clientesFrm.controls.email?.errors?.required">O e-mail é obrigatório</mat-error>
+                                <!-- <mat-error *ngIf="clientesFrm.controls.email?.errors?.required">O e-mail é obrigatório</mat-error> -->
                             </mat-form-field>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                             <mat-form-field class="full-width">
                                 <mat-label>CPF: </mat-label>
                                 <input type="text" matInput placeholder="Digite seu CPF" name="cpf" [(ngModel)]="cliente.cpf" required>
-                                <mat-error *ngIf="clientesFrm.controls.cpf?.errors?.required">O e-mail é obrigatório</mat-error>
+                                <!-- <mat-error *ngIf="clientesFrm.controls.cpf?.errors?.required">O e-mail é obrigatório</mat-error> -->
                             </mat-form-field>
                         </div>
                     </div>
@@ -38,20 +38,23 @@
                             <mat-form-field class="full-width">
                                 <mat-label>Data Nascimento: </mat-label>
                                 <input type="text" matInput placeholder="Digite sua Data de Nascimento" name="dataNascimento" [(ngModel)]="cliente.dataNascimento" required>
-                                <mat-error *ngIf="clientesFrm.controls.dtnasc?.errors?.required">A Data de Nascimento é obrigatória</mat-error>
+                                <!-- <mat-error *ngIf="clientesFrm.controls.dtnasc?.errors?.required">A Data de Nascimento é obrigatória</mat-error> -->
                             </mat-form-field>
                         </div>
                     </div>
                 </mat-card-content>
                 <mat-card-actions class="ml-10">
-                    <button mat-raised-button color="primary" type="submit">
-                        <mat-icon fontIcon="save"></mat-icon>
-                        Salvar
-                    </button>
-                    <button mat-raised-button color="primary" type="submit">
-                        <mat-icon fontIcon="refresh"></mat-icon>
-                        Atualizar
-                    </button>
+                    @if(!atualizando) {
+                        <button mat-raised-button color="primary" type="submit">
+                            <mat-icon fontIcon="save"></mat-icon>
+                            Salvar
+                        </button>
+                    } @else {
+                        <button mat-raised-button color="primary" type="submit">
+                            <mat-icon fontIcon="refresh"></mat-icon>
+                            Atualizar
+                        </button>
+                    }
                     <button  class="ml-5" mat-raised-button color="warn" type="reset">
                         <mat-icon fontIcon="backspace"></mat-icon>
                         Limpar
