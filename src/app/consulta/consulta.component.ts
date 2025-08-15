@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 import { Router } from '@angular/router';
-
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-consulta',
   imports: [
@@ -32,7 +32,7 @@ export class ConsultaComponent implements OnInit {
   listaClientes: Cliente[] = [];
   colunasTable: string[] = ['id', 'nome', 'cpf', 'dataNascimento', 'email', 'acoes'];
 
-  constructor(private service: ClienteService, private router: Router) { 
+  constructor(private service: ClienteService, private router: Router, private messageService: MessageService) { 
 
   }
 
@@ -47,5 +47,23 @@ export class ConsultaComponent implements OnInit {
 
   preparaEditar(id: string){
     this.router.navigate(['/cadastro'], { queryParams: { "id": id } });
+  }
+
+  preparaDeletar(cliente: Cliente){
+    cliente.deletando = true;
+    //     setTimeout(() => {
+    //   this.deletando = false;
+    //   const cliente = this.service.buscarClientePorId(id);
+    //   if (cliente) {
+    //     this.service.atualizar({ ...cliente, deletado: true });
+    //     this.listaClientes = this.listaClientes.filter(c => c.id !== id);
+    //   }
+    // }, 2000);
+  }
+
+  deletar(cliente: Cliente){
+    this.service.deletar(cliente);
+    this.listaClientes = this.service.pesquisarClientes('');
+    this.messageService.showMessage('Cliente deletado com sucesso!');
   }
 }

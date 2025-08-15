@@ -28,7 +28,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>CPF: </mat-label>
-                                <input type="text" matInput placeholder="Digite seu CPF" name="cpf" [(ngModel)]="cliente.cpf" required>
+                                <input type="text" mask="000.000.000-00" matInput placeholder="Digite seu CPF" name="cpf" [(ngModel)]="cliente.cpf" required>
                                 <!-- <mat-error *ngIf="clientesFrm.controls.cpf?.errors?.required">O e-mail é obrigatório</mat-error> -->
                             </mat-form-field>
                         </div>
@@ -37,8 +37,32 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>Data Nascimento: </mat-label>
-                                <input type="text" matInput placeholder="Digite sua Data de Nascimento" name="dataNascimento" [(ngModel)]="cliente.dataNascimento" required>
+                                <input type="text" mask="00/00/0000" matInput placeholder="Digite sua Data de Nascimento" name="dataNascimento" [(ngModel)]="cliente.dataNascimento" required>
                                 <!-- <mat-error *ngIf="clientesFrm.controls.dtnasc?.errors?.required">A Data de Nascimento é obrigatória</mat-error> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>UF - Estado: *</mat-label>
+                                <mat-select (selectionChange)="carregarMunicipios($event)" name="uf" [(value)]="cliente.uf" required>
+                                    <mat-option *ngFor="let uf of estados" [value]="uf.sigla">
+                                        {{ uf.sigla }} - {{ uf.nome }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>Município: *</mat-label>
+                                <mat-select name="municipio" [(value)]="cliente.municipio" required>
+                                    <mat-option *ngFor="let m of municipios" [value]="m.nome">
+                                        {{ m.nome }}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
